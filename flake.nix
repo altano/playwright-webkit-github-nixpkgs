@@ -2,7 +2,8 @@
   description = "playwright + webkit + github action experiment";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Temporary test pin for nixpkgs PR #510475.
+    nixpkgs.url = "github:NixOS/nixpkgs/refs/pull/510475/head";
   };
 
   outputs =
@@ -43,6 +44,7 @@
             PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
             PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = 1;
             PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = 1;
+            WEBKIT_DISABLE_DMABUF_RENDERER = 1;
           };
         }
       );
