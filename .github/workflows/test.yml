@@ -25,7 +25,7 @@ jobs:
       - name: Install Dependencies
         run: nix develop --command pnpm install
       - name: Run Playwright Tests
-        run: nix develop --command pnpm test
+        run: nix develop --command xvfb-run playwright test
         env:
           DEBUG: "pw:browser*"
       - name: Upload Report

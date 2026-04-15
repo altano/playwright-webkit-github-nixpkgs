@@ -37,6 +37,8 @@
               pkgs.pnpm
               pkgs.playwright-test
               pkgs.playwright-driver.browsers
+            ] ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
+              pkgs.xvfb-run
             ];
             PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
             PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = 1;
