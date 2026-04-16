@@ -2,7 +2,8 @@
   description = "playwright + webkit + github action experiment";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # Temporary test pin for nixpkgs PR #510475.
+    nixpkgs.url = "github:NixOS/nixpkgs/refs/pull/510475/head";
   };
 
   outputs =
