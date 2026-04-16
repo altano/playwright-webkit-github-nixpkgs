@@ -29,8 +29,11 @@
     {
       devShells = forEachSystem (
         { pkgs }:
+        let
+          mesaEglVendorFile = "${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json";
+        in
         {
-          default = pkgs.mkShell {
+          default = pkgs.mkShell ({
             buildInputs = [
               pkgs.nodejs_25
               pkgs.nil
@@ -41,7 +44,9 @@
             PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
             PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = 1;
             PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = 1;
-          };
+          } // pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+            __EGL_VENDOR_LIBRARY_FILENAMES = mesaEglVendorFile;
+          });
         }
       );
     };
